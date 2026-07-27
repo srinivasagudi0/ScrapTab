@@ -21,8 +21,8 @@ function makeDraggable(elm, card) {
   
   elm.addEventListener('mousedown', (e) => {
     isDragging = true;
-    offsetX = e.clientX - elm.offsetXleft;
-    offsetY = e.clientY - elm.offsetYtop;
+    offsetX = e.clientX - elm.offsetLeft;
+    offsetY = e.clientY - elm.offsetTop;
   });
 
   document.addEventListener('mousemove', (e) =>{
