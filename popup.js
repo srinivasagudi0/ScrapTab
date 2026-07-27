@@ -28,3 +28,7 @@ document.getElementById('save-page-btn').addEventListener('click', async () => {
 
   window.close();
 });
+
+document.getElementById('open-scrapbook-btn').addEventListener('click', () => {
+  browser.tabs.create({ url: browser.runtime.getURL('scrapbook.html') });
+});
