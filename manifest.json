@@ -15,4 +15,3 @@
         "js": ["browser-polyfill.js", "content.js", "storage.js"]
     }]
 }
-
