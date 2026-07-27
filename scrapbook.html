@@ -10,18 +10,51 @@
     .tabs button.active { background: #333; color: white; }
     .tabs button:hover { background: #ffb703; transform: translateY(-5px); }
     .tabs button.active:hover { background: #333; color: white; transform: translateY(5px); }
+    #clear-all-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 10;
+      padding: 10px 16px;
+      border: 2px solid #111;
+      border-radius: 999px;
+      background: #fff8e7;
+      color: #111;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+    #clear-all-btn:hover {
+      background: #ff0000;
+      color: white;
+    }
     #board { position: relative; width: 100%; height: 2000px; }
     .card {
       position: absolute; width: 220px; min-height: 140px; padding: 12px;
       border-radius: 6px; box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
-      cursor: grab; font-size: 14px; display: flex; flex-direction: column; justify-content: space-between;
+      cursor: grab; font-size: 14px; display: flex; flex-direction: column;
     }
     .card:active { cursor: grabbing; }
-    .card .title { font-weight: bold; margin-bottom: 6px; overflow-wrap: anywhere; word-break: break-word; }
-    .card .note { font-size: 12px; color: #444;  overflow-wrap: anywhere; word-break: break-word; }
+    .card .title { font-weight: bold; margin-bottom: 30px; overflow-wrap: anywhere; word-break: break-word; font-family: cursive; font-size: 1.8rem; }
+    .card .note { font-size: 13px; color: #444;  overflow-wrap: anywhere; word-break: break-word; }
+    .card a {
+      margin-top: auto;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+.card a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
+  <button id="clear-all-btn" type="button">Clear All</button>
   <h1>My Little Scrapbook</h1>
   <div class="tabs">
     <button data-cat="all" class="active">All</button>

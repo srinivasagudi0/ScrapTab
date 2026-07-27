@@ -16,6 +16,14 @@ async function updateCardPosition(id, x, y) {
   }
 }
 
+function getLinkText(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
 function makeDraggable(elm, card) {
   let offsetX, offsetY, isDragging = false;
   
@@ -54,8 +62,13 @@ async function render() {
     el.innerHTML = `
     <div class="title">${card.title || '(untitled)'}</div>
     <div class="note">${card.note || ''}</div>
-    ${card.sourceUrl ? `<a href="${card.sourceUrl}" target="_blank">Source</a>` : ''}
+    ${card.sourceUrl ? `<a href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>` : ''}
     `;
+    const link = el.querySelector('a');
+    if (link) {
+      link.addEventListener('mousedown', (e) => e.stopPropagation());
+    }
+
     board.appendChild(el);
     makeDraggable(el, card);
   });
@@ -68,6 +81,13 @@ document.querySelectorAll('.tabs button').forEach(btn => {
     activeCategory = btn.dataset.cat;
     render();
   });
+});
+
+document.getElementById('clear-all-btn').addEventListener('click', async () => {
+  if (!confirm('Delete all the scraps?')) return;
+
+  await browser.storage.local.set({ cards: [] });
+  render();
 });
 
 render();
