@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "ScrapTab",
+    "version": "0.1",
+    "description": "Your tiny scrapbook for the internet",
+    "action": {
+        "default_popup": "popup.html",
+    },
+    "permissions": ["storage"],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
