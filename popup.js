@@ -1,15 +1,30 @@
-const status = document.getElementById('status')
-const btn = document.getElementById("save-btn")
+const titleInput = document.getElementById('title');
+const noteInput = document.getElementById('note');
+const categoryInput = document.getElementById('category');
+const status = document.getElementById('status');
 
-async function loadStatus() {
-    const data = await browser.storage.local.get('scrap');
-    if (data.scrap) status.textContent = `Saved: "${data.scrap}"`;
-}
+document.getElementById('save-note-btn').addEventListener('click', async () => {
+  await saveCard({
+    type: 'note',
+    title: titleInput.value,
+    note: noteInput.value,
+    category: categoryInput.value,
+    sourceUrl: ''
+  });
 
-btn.addEventListener('click', async () => {
-    const note = `Hello from ${new Date().toLocaleTimeString()}`;
-    await browser.storage.local.set({ scrap: note });
-    loadStatus();
-})
+  status.textContent = 'Saved note';
+});
 
-loadStatus();
+document.getElementById('save-page-btn').addEventListener('click', async () => {
+  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+
+  await saveCard({
+    type: 'page',
+    title: tab.title,
+    note: '',
+    category: 'random',
+    sourceUrl: tab.url
+  });
+
+  window.close();
+});

@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <style>
@@ -7,8 +7,22 @@
         </style>
     </head>
     <body>
-        <p id="status">Nothing saved yet</p>
-        <button id="save-btn">Save a test note</button>
+       <p id="status">Ready to save</p>
+       <input id="title" placeholder="Title">
+         <textarea id="note" placeholder="Short note"></textarea>
+        <select id="category">
+            <option value="coding">Coding</option>
+            <option value="recipes">Recipes</option>
+            <option value="places">Places</option>
+            <option value="random" selected>Random</option>
+        </select>
+        <button id="save-note-btn">Save Quick Note</button>
+        <button id="save-page-btn">Save this page</button>
+
+        <script src="browser-polyfill-min.js"></script>
+        <script src="storage.js"></script>
         <script src="popup.js"></script>
+
+        
     </body>
 </html>

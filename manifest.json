@@ -12,6 +12,6 @@
     },
     "content_scripts": [{
         "matches": ["<all_urls>"],
-        "js": ["browser-polyfill.js", "content.js", "storage.js"]
+        "js": ["browser-polyfill-min.js", "storage.js", "content.js"]
     }]
 }
