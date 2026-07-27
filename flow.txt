@@ -1,0 +1,12 @@
+{
+    id: "1721..."
+    type: "page" | "selection" | "note" | "image",
+    title: "My Page",
+    note: "This is a note about my page.",
+    category: "personal",
+    mood: "😊",
+    color: "#FF5733",
+    sourceUrl: "https://example.com",
+    imageUrl: "https://example.com/image.jpg", only for image type
+    createdAt: "2024-06-01T12:00:00Z",
+}
