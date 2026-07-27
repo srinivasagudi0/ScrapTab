@@ -51,7 +51,11 @@ async function render() {
     el.style.left = (card.x ?? (40 + (i % 4) * 240)) + 'px';
     el.style.top = (card.y ?? (40 + Math.floor(i / 4) * 180)) + 'px';
     el.style.background = card.color || '#fff8e7';
-    el.innerHTML = `<div class="title">${card.title || '(untitled)'}</div><div class="note">${card.note || ''}</div>`;
+    el.innerHTML = `
+    <div class="title">${card.title || '(untitled)'}</div>
+    <div class="note">${card.note || ''}</div>
+    ${card.sourceUrl ? `<a href="${card.sourceUrl}" target="_blank">Source</a>` : ''}
+    `;
     board.appendChild(el);
     makeDraggable(el, card);
   });
