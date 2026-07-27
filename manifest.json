@@ -4,7 +4,7 @@
     "version": "0.1",
     "description": "Your tiny scrapbook for the internet",
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "popup.html"
     },
     "permissions": ["storage"],
     "background": {
