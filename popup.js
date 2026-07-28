@@ -3,29 +3,38 @@ const noteInput = document.getElementById('note');
 const categoryInput = document.getElementById('category');
 const status = document.getElementById('status');
 
-document.getElementById('save-note-btn').addEventListener('click', async () => {
-  await saveCard({
-    type: 'note',
-    title: titleInput.value,
-    note: noteInput.value,
-    category: categoryInput.value,
-    sourceUrl: ''
-  });
+function getSelectedType() {
+  return document.querySelector('input[name="capture-type"]:checked').value;
+}
 
-  status.textContent = 'Saved note';
-});
+document.getElementById('save-card-btn').addEventListener('click', async () => {
+  const type = getSelectedType();
 
-document.getElementById('save-page-btn').addEventListener('click', async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+  if (type === 'note') {
+    await saveCard({
+      type: 'note',
+      title: titleInput.value,
+      note: noteInput.value,
+      category: categoryInput.value,
+      sourceUrl: ''
+    });
+  }
 
-  await saveCard({
-    type: 'page',
-    title: tab.title,
-    note: '',
-    category: 'random',
-    sourceUrl: tab.url
-  });
+  if (type === 'page') {
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    const screenshoot = await browser.tabs.captureVisibleTab();
 
+    await saveCard({
+      type: 'page',
+      title: titleInput.value || tab.title,
+      note: noteInput.value,
+      category: categoryInput.value,
+      sourceUrl: tab.url,
+      screenshotUrl: screenshoot
+    });
+  }
+
+  status.textContent = 'Saved';
   window.close();
 });
 
