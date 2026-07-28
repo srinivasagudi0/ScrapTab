@@ -55,15 +55,26 @@ async function render() {
 
   filtered.forEach((card, i) => {
     const el = document.createElement('div');
-    el.className = 'card';
+    el.className = card.type === 'page' && card.screenshotUrl ? 'card page-card' : 'card';
     el.style.left = (card.x ?? (40 + (i % 4) * 240)) + 'px';
     el.style.top = (card.y ?? (40 + Math.floor(i / 4) * 180)) + 'px';
     el.style.background = card.color || '#fff8e7';
-    el.innerHTML = `
-    <div class="title">${card.title || '(untitled)'}</div>
-    <div class="note">${card.note || ''}</div>
-    ${card.sourceUrl ? `<a href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>` : ''}
-    `;
+    if (card.type === 'page' && card.screenshotUrl) {
+      el.innerHTML = `
+      <img class="page-shot" src="${card.screenshotUrl}">
+      <div class="title">${card.title || '(untitled)'}</div>
+      <div class="note">${card.note || ''}</div>
+      <a class="source" href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>
+      `;
+    } else {
+      el.style.backgroumnd = card.color || '#fff8e7';
+      el.innerHTML = `
+      <div class="title">${card.title || '(untitled)'}</div>
+      <div class="note">${card.note || ''}</div>
+      ${card.sourceUrl ? `<a class="source" href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>` : ''}
+      `;
+    }
+
     const link = el.querySelector('a');
     if (link) {
       link.addEventListener('mousedown', (e) => e.stopPropagation());

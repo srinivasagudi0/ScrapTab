@@ -22,7 +22,7 @@ document.getElementById('save-card-btn').addEventListener('click', async () => {
 
   if (type === 'page') {
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-    const screenshoot = await browser.tabs.captureVisibleTab();
+    const screenshotUrl = await browser.tabs.captureVisibleTab();
 
     await saveCard({
       type: 'page',
@@ -30,7 +30,7 @@ document.getElementById('save-card-btn').addEventListener('click', async () => {
       note: noteInput.value,
       category: categoryInput.value,
       sourceUrl: tab.url,
-      screenshotUrl: screenshoot
+      screenshotUrl: screenshotUrl
     });
   }
 
