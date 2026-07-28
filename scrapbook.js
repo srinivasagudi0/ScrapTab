@@ -29,6 +29,7 @@ function makeDraggable(elm, card) {
   
   elm.addEventListener('mousedown', (e) => {
     isDragging = true;
+    elm.classList.add('dragging');
     offsetX = e.clientX - elm.offsetLeft;
     offsetY = e.clientY - elm.offsetTop;
   });
@@ -42,6 +43,7 @@ function makeDraggable(elm, card) {
   document.addEventListener('mouseup', () => {
     if (isDragging) {
       isDragging = false;
+      elm.classList.remove('dragging');
       updateCardPosition(card.id, parseInt(elm.style.left), parseInt(elm.style.top));
     }
   });

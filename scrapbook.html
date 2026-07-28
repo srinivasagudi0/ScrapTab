@@ -58,8 +58,31 @@
       text-overflow: ellipsis;
     }
 
-.card a:hover {
-  text-decoration: underline;
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .card::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 70px;
+  height: 24px;
+  background: rgba(255, 244, 180, 0.75);
+  border: 1px solid rgba(180, 160, 90, 0.35);
+  transform: translateX(-50%) rotate(-4deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card.dragging::before {
+  opacity: 0;
+}
+.card {
+  position: absolute;
+  overflow: visible;
 }
 
   .page-card {
