@@ -62,7 +62,7 @@
     text-decoration: underline;
   }
 
-  .card::before {
+  .card:not(.page-card)::before {
   content: "";
   position: absolute;
   top: -12px;
@@ -77,7 +77,7 @@
   pointer-events: none;
 }
 
-.card.dragging::before {
+.card.dragging:not(.page-card)::before {
   opacity: 0;
 }
 .card {
@@ -99,14 +99,59 @@
     margin-bottom: 10px;
   }
 
-  .page-card .source {
-  margin-top: auto;
-  color: #2563eb;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  }
-  </style>
+	  .page-card .source {
+	  margin-top: auto;
+	  color: #2563eb;
+	  font-size: 13px;
+	  font-weight: 700;
+	  text-decoration: none;
+	  }
+
+    .quote-card {
+      width: 270px;
+      min-height: 190px;
+      padding: 18px;
+      background: #fffdf4;
+      border: 1px solid #e3d6b8;
+      border-radius: 8px;
+    }
+
+    .quote-card .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 56px;
+      line-height: 0.7;
+      color: #2f2f2f;
+      margin-bottom: 4px;
+    }
+
+    .quote-card .quote-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.7rem;
+      line-height: 1.1;
+      color: #111;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .quote-card .cut-line {
+      border-top: 2px dotted rgba(0,0,0,0.35);
+      margin: 14px 0 8px;
+    }
+
+    .quote-card .quote-source {
+      color: #555;
+      font-size: 12px;
+      font-style: italic;
+      text-decoration: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .quote-card .quote-source:hover {
+      text-decoration: underline;
+    }
+	  </style>
 </head>
 <body>
   <button id="clear-all-btn" type="button">Clear All</button>

@@ -24,6 +24,61 @@ function getLinkText(url) {
   }
 }
 
+function addText(el, className, text) {
+  const child = document.createElement('div');
+  child.className = className;
+  child.textContent = text;
+  el.appendChild(child);
+  return child;
+}
+
+function addSourceLink(el, className, url, label) {
+  const link = document.createElement('a');
+  link.className = className;
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noreferrer';
+  link.textContent = label;
+  link.addEventListener('mousedown', (e) => e.stopPropagation());
+  el.appendChild(link);
+  return link;
+}
+
+function renderPageCard(el, card) {
+  const image = document.createElement('img');
+  image.className = 'page-shot';
+  image.src = card.screenshotUrl;
+  image.alt = card.title || 'Saved page screenshot';
+  el.appendChild(image);
+
+  addText(el, 'title', card.title || '(untitled)');
+  addText(el, 'note', card.note || '');
+
+  if (card.sourceUrl) {
+    addSourceLink(el, 'source', card.sourceUrl, getLinkText(card.sourceUrl));
+  }
+}
+
+function renderQuoteCard(el, card) {
+  addText(el, 'quote-mark', '"');
+  addText(el, 'quote-text', card.note || card.title || '');
+  addText(el, 'cut-line', '');
+
+  if (card.sourceUrl) {
+    addSourceLink(el, 'quote-source', card.sourceUrl, `from: ${getLinkText(card.sourceUrl)}`);
+  }
+}
+
+function renderBasicCard(el, card) {
+  el.style.background = card.color || '#fff8e7';
+  addText(el, 'title', card.title || '(untitled)');
+  addText(el, 'note', card.note || '');
+
+  if (card.sourceUrl) {
+    addSourceLink(el, 'source', card.sourceUrl, getLinkText(card.sourceUrl));
+  }
+}
+
 function makeDraggable(elm, card) {
   let offsetX, offsetY, isDragging = false;
   
@@ -57,29 +112,23 @@ async function render() {
 
   filtered.forEach((card, i) => {
     const el = document.createElement('div');
-    el.className = card.type === 'page' && card.screenshotUrl ? 'card page-card' : 'card';
-    el.style.left = (card.x ?? (40 + (i % 4) * 240)) + 'px';
-    el.style.top = (card.y ?? (40 + Math.floor(i / 4) * 180)) + 'px';
-    el.style.background = card.color || '#fff8e7';
     if (card.type === 'page' && card.screenshotUrl) {
-      el.innerHTML = `
-      <img class="page-shot" src="${card.screenshotUrl}">
-      <div class="title">${card.title || '(untitled)'}</div>
-      <div class="note">${card.note || ''}</div>
-      <a class="source" href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>
-      `;
+      el.className = 'card page-card';
+    } else if (card.type === 'selection') {
+      el.className = 'card quote-card';
     } else {
-      el.style.backgroumnd = card.color || '#fff8e7';
-      el.innerHTML = `
-      <div class="title">${card.title || '(untitled)'}</div>
-      <div class="note">${card.note || ''}</div>
-      ${card.sourceUrl ? `<a class="source" href="${card.sourceUrl}" target="_blank">${getLinkText(card.sourceUrl)}</a>` : ''}
-      `;
+      el.className = 'card';
     }
 
-    const link = el.querySelector('a');
-    if (link) {
-      link.addEventListener('mousedown', (e) => e.stopPropagation());
+    el.style.left = (card.x ?? (40 + (i % 4) * 240)) + 'px';
+    el.style.top = (card.y ?? (40 + Math.floor(i / 4) * 180)) + 'px';
+
+    if (card.type === 'page' && card.screenshotUrl) {
+      renderPageCard(el, card);
+    } else if (card.type === 'selection') {
+      renderQuoteCard(el, card);
+    } else {
+      renderBasicCard(el, card);
     }
 
     board.appendChild(el);
