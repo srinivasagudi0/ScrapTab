@@ -1,2 +1,3 @@
 # ScrapTab
-will writre this later
+
+ScrapTab is a Chrome(only) extension that allows you make memories as you

@@ -75,7 +75,7 @@ function renderImageCard(el, card) {
   el.appendChild(pin);
 
   const image = document.createElement('img');
-  image.className= "saved-image";
+  image.className = 'saved-image';
   image.src = card.imageUrl;
   image.alt = card.title || 'Saved image';
   el.appendChild(image);
@@ -85,7 +85,7 @@ function renderImageCard(el, card) {
   }
 
   if (card.sourceUrl) {
-    addSourceLink(el, 'source', card.sourceUrl, getLinkText(card.sourceUrl));
+    addSourceLink(el, 'image-source', card.sourceUrl, getLinkText(card.sourceUrl));
   }
 }
 
@@ -138,8 +138,6 @@ async function render() {
       el.className = 'card quote-card';
     } else if (card.type === 'image') {
       el.className = 'card image-card';
-    } else if (card.type === 'image') {
-      renderImageCard(el, card);
     } else {
       el.className = 'card';
     }
@@ -151,6 +149,8 @@ async function render() {
       renderPageCard(el, card);
     } else if (card.type === 'selection') {
       renderQuoteCard(el, card);
+    } else if (card.type === 'image') {
+      renderImageCard(el, card);
     } else {
       renderBasicCard(el, card);
     }
