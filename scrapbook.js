@@ -69,6 +69,26 @@ function renderQuoteCard(el, card) {
   }
 }
 
+function renderImageCard(el, card) {
+  const pin = document.createElement('div');
+  pin.className = 'pushpin';
+  el.appendChild(pin);
+
+  const image = document.createElement('img');
+  image.className= "saved-image";
+  image.src = card.imageUrl;
+  image.alt = card.title || 'Saved image';
+  el.appendChild(image);
+
+  if (card.note) {
+    addText(el, 'image-caption', card.note);
+  }
+
+  if (card.sourceUrl) {
+    addSourceLink(el, 'source', card.sourceUrl, getLinkText(card.sourceUrl));
+  }
+}
+
 function renderBasicCard(el, card) {
   el.style.background = card.color || '#fff8e7';
   addText(el, 'title', card.title || '(untitled)');
@@ -116,6 +136,10 @@ async function render() {
       el.className = 'card page-card';
     } else if (card.type === 'selection') {
       el.className = 'card quote-card';
+    } else if (card.type === 'image') {
+      el.className = 'card image-card';
+    } else if (card.type === 'image') {
+      renderImageCard(el, card);
     } else {
       el.className = 'card';
     }
