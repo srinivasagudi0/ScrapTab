@@ -6,6 +6,33 @@
             button { width: 100%; padding: 8px; margin-top: 8px; color:rgba(143, 202, 254, 0.438);}
             textarea { width: 100%; height: 80px; margin-top: 8px;  background: #f7cf85;}
             input { background: #f7cf85; }
+            .save-confirmation {
+                text-align: center;
+                font-weight: bold;
+                color: white;
+                background: #111;
+                border-radius: 8px;
+                margin-top: 8px;
+            }
+            body.blast-off {
+                animation: blastOff 0.45s ease-in forwards;
+            }
+
+            @keyframes blastOff {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                }
+                60% {
+                    transform: translateY(-10) scale(1.05) rotate(-2deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-90px) scale(0.5) rotate(8deg);
+                    opacity: 0;
+                }
+
+            }
         </style>
     </head>
     <body>
@@ -21,6 +48,7 @@
         <label><input type="radio" name="capture-type" value="note" checked> Note</label>
         <label><input type="radio" name="capture-type" value="page"> Page</label>
         <button id="save-card-btn">Save</button>
+        <div class="save-confirmation" hidden>Saved!</div>
         <button id="open-scrapbook-btn" style="background-color: aquamarine;">Open My Scrapbook</button>
 
         <script src="browser-polyfill-min.js"></script>
