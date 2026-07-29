@@ -84,8 +84,8 @@ function renderImageCard(el, card) {
     addText(el, 'image-caption', card.note);
   }
 
-  if (card.sourceUrl) {
-    addSourceLink(el, 'image-source', card.sourceUrl, getLinkText(card.sourceUrl));
+  if (card.note) {
+    addText(el, 'image-caption', card.note);
   }
 }
 
