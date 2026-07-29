@@ -7,12 +7,12 @@ function getSelectedType() {
   return document.querySelector('input[name="capture-type"]:checked').value;
 }
 
-const confirmation = document.getElementById('save-confirmation');
+const confirmation = document.querySelector('.save-confirmation');
 
 function closeWithAnimation() {
   confirmation.hidden = false;
   status.textContent = 'Saved!';
-  confirmation.body.classList.add('blast-off');
+  document.body.classList.add('blast-off');
   setTimeout(() => {
     window.close();
   }, 450);
