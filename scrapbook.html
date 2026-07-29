@@ -44,6 +44,7 @@
       position: absolute; width: 220px; min-height: 140px; padding: 12px;
       border-radius: 6px; box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
       cursor: grab; font-size: 14px; display: flex; flex-direction: column;
+      isolation: isolate;
     }
     .card:active { cursor: grabbing; }
     .card .title { font-weight: bold; margin-bottom: 30px; overflow-wrap: anywhere; word-break: break-word; font-family: cursive; font-size: 1.8rem;}
@@ -74,7 +75,7 @@
   border: 1px solid rgba(180, 160, 90, 0.35);
   transform: translateX(-50%) rotate(-4deg);
   box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-  z-index: 2;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -179,21 +180,31 @@
       opacity: 0;
     }
 
-    .image-card .saved-image {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 2px;
-      background: #eee;
-    }
-    
-    .image-card .image-caption {
-      margin-top: 12px;
-      font-size: 1.5rem;
-      line-height: 1.1;
-      color: #111;
-      overflow-wrap: anywhere;
-    }
+	    .image-card .saved-image {
+	      width: 100%;
+	      height: 170px;
+	      object-fit: cover;
+	      border-radius: 2px;
+	      background: #eee;
+	    }
+
+	    .image-card .image-title {
+	      margin-top: 12px;
+	      font-family: 'Caveat', cursive;
+	      font-size: 1.6rem;
+	      line-height: 1.05;
+	      font-weight: 700;
+	      color: #111;
+	      overflow-wrap: anywhere;
+	    }
+	    
+	    .image-card .image-caption {
+	      margin-top: 6px;
+	      font-size: 1rem;
+	      line-height: 1.1;
+	      color: #444;
+	      overflow-wrap: anywhere;
+	    }
 
     .image-card .image-source {
       margin-top: 8px;

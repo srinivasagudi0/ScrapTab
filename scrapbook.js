@@ -80,8 +80,8 @@ function renderImageCard(el, card) {
   image.alt = card.title || 'Saved image';
   el.appendChild(image);
 
-  if (card.note) {
-    addText(el, 'image-caption', card.note);
+  if (card.title) {
+    addText(el, 'image-title', card.title);
   }
 
   if (card.note) {
