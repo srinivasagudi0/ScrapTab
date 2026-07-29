@@ -90,7 +90,6 @@ function renderImageCard(el, card) {
 }
 
 function renderBasicCard(el, card) {
-  el.style.background = card.color || '#fff8e7';
   addText(el, 'title', card.title || '(untitled)');
   addText(el, 'note', card.note || '');
 
