@@ -1,9 +1,9 @@
-importScripts("browser-poilyfill-min.js");
+importScripts("browser-polyfill-min.js");
 
 browser.runtime.onInstalled.addListener(() => {
   browser.contextMenus.create({ id: "save-selection", title: "Add to Scraplet", contexts: ["selection"] });
   browser.contextMenus.create({ id: "save-image", title: "Add Image to Scraplet", contexts: ["image"] });
-  browser.alarms.create('memory-check', { periodInMinutes: 1440 });s
+  browser.alarms.create('memory-check', { periodInMinutes: 1440 });
 });
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
@@ -44,4 +44,3 @@ browser.alarms.onAlarm.addListener(async (alarm) => {
 browser.notifications.onClicked.addListener(() => {
   browser.tabs.create({ url: browser.runtime.getURL('scrapbook.html') });
 });
-

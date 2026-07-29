@@ -2,8 +2,8 @@
 <html>
     <head>
         <style>
-            body { width: 220px; font-family: sans-serif; padding: 12px; background-color: #0ab0a5; }
-            button { width: 100%; padding: 8px; margin-top: 8px; color:rgba(143, 202, 254, 0.438);}
+            body { width: 220px; font-family: sans-serif; padding: 12px; background-color: #3c0ab0dd; }
+            button { width: 100%; padding: 8px; margin-top: 8px; color:rgb(246, 242, 242); background: rgba(255, 0, 0, 0.708); transition: transform 0.2s ease-in-out;}
             textarea { width: 100%; height: 80px; margin-top: 8px;  background: #f7cf85;}
             input { background: #f7cf85; }
             .save-confirmation {
@@ -17,6 +17,7 @@
             body.blast-off {
                 animation: blastOff 0.45s ease-in forwards;
             }
+            h1 {color: rgb(238, 238, 238);}
 
             @keyframes blastOff {
                 0% {
@@ -31,8 +32,13 @@
                     transform: translateY(-90px) scale(0.5) rotate(8deg);
                     opacity: 0;
                 }
-
             }
+
+            button:hover {
+                transform: translateY(-5px);
+            }
+            select { width: 100%; margin-top: 8px; background: #f7cf85; }
+            label { display: block; margin-top: 8px; color: rgb(154, 192, 3); }
         </style>
     </head>
     <body>
@@ -49,7 +55,7 @@
         <label><input type="radio" name="capture-type" value="page"> Page</label>
         <button id="save-card-btn">Save</button>
         <div class="save-confirmation" hidden>Saved!</div>
-        <button id="open-scrapbook-btn" style="background-color: aquamarine;">Open My Scrapbook</button>
+        <button id="open-scrapbook-btn" style="background-color: rgb(19, 201, 140);">Open My Scrapbook</button>
 
         <script src="browser-polyfill-min.js"></script>
         <script src="storage.js"></script>
