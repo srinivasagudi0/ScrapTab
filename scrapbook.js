@@ -2,12 +2,12 @@ let activeCategory = 'all';
 
 async function getCards() {
   const data = await browser.storage.local.get('cards');
-  return data.cards || [];
+  return Array.isArray(data.cards) ? data.cards : [];
 }
 
 async function updateCardPosition(id, x, y) {
   const data = await browser.storage.local.get('cards');
-  const cards = data.cards || [];
+  const cards = Array.isArray(data.cards) ? data.cards : [];
   const card = cards.find(c => c.id === id);
   if (card) {
     card.x = x;

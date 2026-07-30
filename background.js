@@ -19,7 +19,7 @@ browser.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name !== 'memory-check') return;
 
   const data = await browser.storage.local.get('cards');
-  const cards = data.cards || [];
+  const cards = Array.isArray(data.cards) ? data.cards : [];
   const threeWeeksAgo = Date.now() - (21 * 24 * 60 * 60 * 1000);
   
   const candidates = cards.filter((card) => {
