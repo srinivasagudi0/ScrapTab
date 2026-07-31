@@ -232,6 +232,42 @@
     .image-card {
       background: #fa9b7eda;
     }
+    .search-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .search-btn {
+      width: 45px;
+      height: 38px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      font-size: 10px;
+    }
+    .search-btn:hover{
+      background: #ffb703;
+      transform: scale(1.05);
+    }
+
+    .search-input {
+      width: 240px;
+      height: 38px;
+      padding: 8px 12px;
+      box-sizing: border-box;
+      resize: none;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      font: inherit;
+    }
+    [hidden] {
+      display: none !important;
+    }
 	  </style>
 </head>
 <body>
@@ -243,6 +279,15 @@
     <button data-cat="recipes">Recipes</button>
     <button data-cat="places">Places</button>
     <button data-cat="random">Random</button>
+  </div>
+  <div class="search-control">
+    <button class="search-btn" title="Search Scraps">Search</button>
+
+    <textarea 
+      class="search-input" placeholder="Search scraps..."
+      hidden
+    ></textarea>
+  </div>
   </div>
   <div id="board"></div>
   <script src="browser-polyfill-min.js"></script>
