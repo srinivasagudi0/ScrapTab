@@ -127,7 +127,18 @@ async function render() {
   const board = document.getElementById('board');
   board.innerHTML = '';
   const cards = await getCards();
-  const filtered = activeCategory === 'all' ? cards : cards.filter(c => c.category === activeCategory);
+  const filtered = cards.filter(card => {
+    const matchesCategory = activeCategory === 'all' || card.category === activeCategory;
+
+    const searchableText = [
+      card.title,
+      card.note,
+      card.sourceUrl
+    ].filter(Boolean).join(' ').toLowerCase();
+    
+    const matchesSearch = searchableTect.includes(activeSearch.toLowerCase());
+    return matchesCategory && matchesSearch;
+  })
 
   filtered.forEach((card, i) => {
     const el = document.createElement('div');
@@ -174,5 +185,27 @@ document.getElementById('clear-all-btn').addEventListener('click', async () => {
   await browser.storage.local.set({ cards: [] });
   render();
 });
+
+let activeSearch = '';
+
+const searchButton = document.getElementById('search-btn');
+const searchInput = document.getElementById('search-input');
+
+searchButton.addEventListener('click', () => {
+  searchInput.hidden = !searchInput.hidden;
+  if (!searchInput.hidden) {
+    searchInput.focus();
+  } else {
+    activeSearch = '';
+    render();
+  }
+})
+
+searchInput.addEventListener('input', () => {
+  activeSearch = searchInput.value;
+  render();
+});
+
+
 
 render();
