@@ -1,4 +1,5 @@
 let activeCategory = 'all';
+let activeSearch = '';
 
 async function getCards() {
   const data = await browser.storage.local.get('cards');
@@ -136,9 +137,9 @@ async function render() {
       card.sourceUrl
     ].filter(Boolean).join(' ').toLowerCase();
     
-    const matchesSearch = searchableTect.includes(activeSearch.toLowerCase());
+    const matchesSearch = searchableText.includes(activeSearch);
     return matchesCategory && matchesSearch;
-  })
+  });
 
   filtered.forEach((card, i) => {
     const el = document.createElement('div');
@@ -186,8 +187,6 @@ document.getElementById('clear-all-btn').addEventListener('click', async () => {
   render();
 });
 
-let activeSearch = '';
-
 const searchButton = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
 
@@ -196,13 +195,14 @@ searchButton.addEventListener('click', () => {
   if (!searchInput.hidden) {
     searchInput.focus();
   } else {
+    searchInput.value = '';
     activeSearch = '';
     render();
   }
-})
+});
 
 searchInput.addEventListener('input', () => {
-  activeSearch = searchInput.value;
+  activeSearch = searchInput.value.trim().toLowerCase();
   render();
 });
 

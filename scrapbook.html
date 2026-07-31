@@ -281,10 +281,13 @@
     <button data-cat="random">Random</button>
   </div>
   <div class="search-control">
-    <button class="search-btn" title="Search Scraps">Search</button>
+    <button id="search-btn" class="search-btn" type="button" title="Search Scraps" aria-label="Search Scraps">Search</button>
 
-    <textarea 
-      class="search-input" placeholder="Search scraps..."
+    <textarea
+      id="search-input"
+      class="search-input"
+      placeholder="Search scraps..."
+      aria-label="Search scraps"
       hidden
     ></textarea>
   </div>
